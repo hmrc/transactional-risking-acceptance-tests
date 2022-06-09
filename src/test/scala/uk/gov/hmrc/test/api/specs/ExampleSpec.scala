@@ -23,18 +23,23 @@ class ExampleSpec extends BaseSpec {
 
   Feature("Example of using the Individuals Matching API") {
 
-    Scenario("Get an individuals details by MatchId") {
+    Scenario("Get transactional risking hello worl response") {
 
-      Given("There is an existing individual with a MatchId")
-      val authBearerToken: String    = authHelper.getAuthBearerToken
-      val individualsMatchId: String = testDataHelper.createAnIndividual(authBearerToken, ninoUser)
+      Given("There is an existing transactional risking api")
+      //val authBearerToken: String    = authHelper.getAuthBearerToken
+      val individualsMatchId: Unit = testDataHelper.createAnIndividual(ninoUser)
+      //val authBearerToken: String    = authHelper.getAuthBearerToken
+    // val individualsMatchId: String = testDataHelper.createAnIndividual( ninoUser)
+      def  transactionalrisking :String = testDataHelper.obtainMatchIdFromHref()
 
-      When("I use that MatchId to retrieve the same individuals details")
-      val actualUser: User =
-        individualsMatchingHelper.getIndividualByMatchId(authBearerToken, individualsMatchId)
+      When("I invoke the transactional risking local endpoint")
+      def createdUser : User = testDataHelper.createAnIndividual( ninoUser)
+     //val actualUser: User =
+        //individualsMatchingHelper.getIndividualByMatchId(authBearerToken, individualsMatchId)
 
-      Then("I am returned the individuals details")
-      actualUser shouldBe ninoUser
+      Then("api call returned with the details of expected response body")
+      createdUser shouldBe ninoUser
+      //actualUser shouldBe ninoUser
     }
 
   }

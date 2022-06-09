@@ -23,3 +23,12 @@ case class IndividualsLinks(name: String, href: String, title: String)
 object IndividualsLinks {
   implicit val userJsonFormat: OFormat[IndividualsLinks] = Json.format[IndividualsLinks]
 }
+
+
+
+
+//case class IndividualsLinks(name: String, href: String, title: String)
+//
+//object IndividualsLinks {
+//  implicit val userJsonFormat: OFormat[IndividualsLinks] = Json.format[IndividualsLinks]
+//}
