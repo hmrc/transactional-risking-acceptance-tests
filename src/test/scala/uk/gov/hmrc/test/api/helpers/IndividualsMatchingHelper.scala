@@ -27,18 +27,7 @@ class IndividualsMatchingHelper {
 
   def getIndividualByMatchId(individualsMatchId: String): User = {
     val individualsMatchGetResponse: StandaloneWSRequest#Self#Response =
-      individualsMatchingServiceAPI.getIndividualByMatchId( )
+      individualsMatchingServiceAPI.getIndividualByMatchId()
     (Json.parse(individualsMatchGetResponse.body) \ "hello-world").as[User]
   }
-
-
-
-//  val individualsMatchingServiceAPI: IndividualsMatchingService = new IndividualsMatchingService
-//
-//  def getIndividualByMatchId(authBearerToken: String, individualsMatchId: String): User = {
-//    val individualsMatchGetResponse: StandaloneWSRequest#Self#Response =
-//      individualsMatchingServiceAPI.getIndividualByMatchId(authBearerToken, individualsMatchId)
-//    (Json.parse(individualsMatchGetResponse.body) \ "individual").as[User]
-//  }
-
 }

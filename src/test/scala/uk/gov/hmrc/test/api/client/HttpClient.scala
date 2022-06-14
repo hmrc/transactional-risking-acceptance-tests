@@ -26,8 +26,8 @@ import scala.concurrent.{ExecutionContext, Future}
 trait HttpClient {
 
   implicit val actorSystem: ActorSystem = ActorSystem()
-  val wsClient: StandaloneAhcWSClient   = StandaloneAhcWSClient()
-  implicit val ec: ExecutionContext     = ExecutionContext.global
+  val wsClient: StandaloneAhcWSClient = StandaloneAhcWSClient()
+  implicit val ec: ExecutionContext = ExecutionContext.global
 
   def get(url: String, headers: (String, String)*): Future[StandaloneWSRequest#Self#Response] =
     wsClient

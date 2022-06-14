@@ -25,7 +25,7 @@ import scala.concurrent.duration._
 
 class AuthService extends HttpClient {
 
-  val host: String        = TestConfiguration.url("auth")
+  val host: String = TestConfiguration.url("auth")
   val authPayload: String =
     s"""
        |{
@@ -62,5 +62,4 @@ class AuthService extends HttpClient {
       10.seconds
     )
   }
-
 }

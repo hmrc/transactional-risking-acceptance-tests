@@ -16,30 +16,28 @@
 
 package uk.gov.hmrc.test.api.specs
 
+import play.api.libs.ws.StandaloneWSRequest
 import uk.gov.hmrc.test.api.models.User
 import uk.gov.hmrc.test.api.models.User._
 
-class ExampleSpec extends BaseSpec {
+import scala.::
+
+class HelloWorldSpec extends BaseSpec {
 
   Feature("Example of using the Individuals Matching API") {
 
-    Scenario("Get transactional risking hello worl response") {
+    Scenario("Get transactional risking hello world response") {
 
       Given("There is an existing transactional risking api")
-      //val authBearerToken: String    = authHelper.getAuthBearerToken
-      val individualsMatchId: Unit = testDataHelper.createAnIndividual(ninoUser)
-      //val authBearerToken: String    = authHelper.getAuthBearerToken
-    // val individualsMatchId: String = testDataHelper.createAnIndividual( ninoUser)
-      def  transactionalrisking :String = testDataHelper.obtainMatchIdFromHref()
-
       When("I invoke the transactional risking local endpoint")
-      def createdUser : User = testDataHelper.createAnIndividual( ninoUser)
-     //val actualUser: User =
-        //individualsMatchingHelper.getIndividualByMatchId(authBearerToken, individualsMatchId)
+      val userResponse: StandaloneWSRequest#Self#Response = testDataHelper.getIndividualUser(ninoUser)
+
 
       Then("api call returned with the details of expected response body")
-      createdUser shouldBe ninoUser
-      //actualUser shouldBe ninoUser
+      userResponse.status shouldBe 200
+      val returnedUser: String = userResponse.body
+      User(returnedUser) shouldBe ninoUser
+
     }
 
   }

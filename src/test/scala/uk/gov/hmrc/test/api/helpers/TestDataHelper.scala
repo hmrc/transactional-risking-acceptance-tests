@@ -28,37 +28,19 @@ class TestDataHelper {
 
   val individualsMatchingServiceAPI: IndividualsMatchingService = new IndividualsMatchingService
 
-  def createAnIndividual(expectedIndividual: User): User = {
-    val individualsMatchPostResponse: StandaloneWSRequest#Self#Response =
-      individualsMatchingServiceAPI.postIndividualPayload(expectedIndividual)
-    val returnedVal: String = individualsMatchPostResponse.body
-       //val matchIdHref = obtainMatchIdFromHref(individualsMatchPostResponse)
-      User(returnedVal)
+  def getIndividualUser(expectedIndividual: User) = {
+    val individualUserResponse: StandaloneWSRequest#Self#Response =
+      individualsMatchingServiceAPI.getIndividualUserService(expectedIndividual)
+    individualUserResponse
 
-    //    def createAnIndividual(authBearerToken: String, expectedIndividual: User): String = {
-    //    val individualsMatchPostResponse: StandaloneWSRequest#Self#Response =
-    //      individualsMatchingServiceAPI.postIndividualPayload(authBearerToken, expectedIndividual)
-    //    obtainMatchIdFromHref(individualsMatchPostResponse)
   }
 
   def obtainMatchIdFromHref(individualsMatchPostResponse: StandaloneWSRequest#Self#Response): String = {
     val individualsLinks: IndividualsLinks =
-    (Json.parse(individualsMatchPostResponse.body) \ "transactional-risking" \ "hello-world").as[IndividualsLinks]
-     //println("At Line No: 46 transactional-risking value =${individualsLinks}")
-     // (Json.parse(individualsMatchPostResponse.body) \ "_links" \ "individual").as[IndividualsLinks]
+      (Json.parse(individualsMatchPostResponse.body) \ "transactional-risking" \ "hello-world").as[IndividualsLinks]
     val pattern: Regex = "/hello-world/matching/([0-9a-z-]+)".r
-    val pattern(matchId: String)           = individualsLinks.href
+    val pattern(matchId: String) = individualsLinks.href
     matchId
-
-
-    //  def obtainMatchIdFromHref(individualsMatchPostResponse: StandaloneWSRequest#Self#Response): String = {
-    //    val individualsLinks: IndividualsLinks =
-    //     // (Json.parse(individualsMatchPostResponse.body) \ "_links" \ "individual").as[IndividualsLinks]
-    //    val pattern: Regex                     = "/individuals/matching/([0-9a-z-]+)".r
-    //    val pattern(matchId: String)           = individualsLinks.href
-    //    matchId5
-    //  }
-
 
   }
 }

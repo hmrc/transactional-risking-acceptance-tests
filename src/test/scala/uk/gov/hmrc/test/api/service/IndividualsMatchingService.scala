@@ -26,59 +26,25 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 
 class IndividualsMatchingService extends HttpClient {
-  val host: String                   = TestConfiguration.url("ims")
+  val host: String = TestConfiguration.url("ims")
   val individualsMatchingURL: String = s"$host/transactional-risking/hello-world"
 
   def getIndividualByMatchId(): StandaloneWSRequest#Self#Response =
     Await.result(
       get(
         individualsMatchingURL,
-//        ("Authorization", authToken),
-//        ("CorrelationId", "12345678"),
-//        ("Accept", "application/vnd.hmrc.P1.0+json")
       ),
       10.seconds
     )
-//  def getIndividualByMatchId(authToken: String, matchId: String): StandaloneWSRequest#Self#Response =
-//    Await.result(
-//      get(
-//        individualsMatchingURL + matchId,
-//        ("Authorization", authToken),
-//        ("CorrelationId", "12345678"),
-//        ("Accept", "application/vnd.hmrc.P1.0+json")
-//      ),
-//      10.seconds
-//    )
 
-  def postIndividualPayload( individual: User): StandaloneWSRequest#Self#Response = {
+  def getIndividualUserService(individual: User): StandaloneWSRequest#Self#Response = {
     val individualPayload = Json.toJsObject(individual)
     println(s"The individualPayload = ${individualPayload} and the value for individualsMatchingURL = ${individualsMatchingURL}")
     Await.result(
-     get(
+      get(
         individualsMatchingURL,
-      // Json.stringify(individualPayload),
-        //("Content-Type", "application/json"),
-        //("Authorization", authToken),
-        //("CorrelationId", "12345678"),
-        //("Accept", "application/vnd.hmrc.P1.0+json")
-     ),
-     10.seconds
+      ),
+      10.seconds
     )
-
   }
-
-//  }def postIndividualPayload(authToken: String, individual: User): StandaloneWSRequest#Self#Response = {
-//    val individualPayload = Json.toJsObject(individual)
-//    Await.result(
-//      post(
-//        individualsMatchingURL,
-//        Json.stringify(individualPayload),
-//        ("Content-Type", "application/json"),
-//        ("Authorization", authToken),
-//        ("CorrelationId", "12345678"),
-//        ("Accept", "application/vnd.hmrc.P1.0+json")
-//      ),
-//      10.seconds
-//    )
-//  }
 }

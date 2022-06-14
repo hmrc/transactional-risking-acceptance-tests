@@ -22,11 +22,6 @@ case class User(string: String)
 
 object User {
   implicit val userJsonFormat: OFormat[User] = Json.format[User]
-  val ninoUser: User                         = User("Hello world")
+  val ninoUser: User = User("Hello world")
 
- //case class User(firstName: String, lastName: String, nino: String, dateOfBirth: String)
-
-//  object User {
-//  implicit val userJsonFormat: OFormat[User] = Json.format[User]
-//  val ninoUser: User                         = User("Luke", "Wood", "EG724113D", "1960-04-06")
 }
