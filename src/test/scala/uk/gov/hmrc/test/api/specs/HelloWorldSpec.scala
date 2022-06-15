@@ -28,10 +28,8 @@ class HelloWorldSpec extends BaseSpec {
 
     Scenario("Get transactional risking hello world response") {
 
-      Given("There is an existing transactional risking api")
       When("I invoke the transactional risking local endpoint")
-      val userResponse: StandaloneWSRequest#Self#Response = testDataHelper.getIndividualUser(ninoUser)
-
+      val userResponse: StandaloneWSRequest#Self#Response = testDataHelper.getHelloWorldUser(ninoUser)
 
       Then("api call returned with the details of expected response body")
       userResponse.status shouldBe 200

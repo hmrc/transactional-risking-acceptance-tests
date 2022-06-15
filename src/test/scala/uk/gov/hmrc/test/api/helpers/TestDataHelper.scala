@@ -28,10 +28,10 @@ class TestDataHelper {
 
   val individualsMatchingServiceAPI: IndividualsMatchingService = new IndividualsMatchingService
 
-  def getIndividualUser(expectedIndividual: User) = {
-    val individualUserResponse: StandaloneWSRequest#Self#Response =
+  def getHelloWorldUser(expectedIndividual: User) = {
+    val helloWorldUserResponse: StandaloneWSRequest#Self#Response =
       individualsMatchingServiceAPI.getIndividualUserService(expectedIndividual)
-    individualUserResponse
+    helloWorldUserResponse
 
   }
 
