@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.helpers
+package uk.gov.hmrc.test.api.service
 
-import org.scalatest.Assertions.fail
 import play.api.libs.ws.StandaloneWSRequest
-import uk.gov.hmrc.test.api.service.AuthService
+import uk.gov.hmrc.test.api.client.HttpClient
+import uk.gov.hmrc.test.api.conf.TestConfiguration
 
-class AuthHelper {
+import scala.concurrent.Await
+import scala.concurrent.duration._
 
-  val authAPI: AuthService = new AuthService
+class TransactionalRiskingServiceClient extends HttpClient {
+  val host: String          = TestConfiguration.url("transactionalRisking")
+  val helloWorldUrl: String = s"$host/transactional-risking/hello-world"
 
-  def getAuthBearerToken: String = {
-    val authServiceRequestResponse: StandaloneWSRequest#Self#Response = authAPI.postLogin
-    authServiceRequestResponse.header("Authorization").getOrElse(fail("Could not obtain auth bearer token"))
-  }
+  def callHelloWorld(): StandaloneWSRequest#Self#Response =
+    Await.result(
+      get(helloWorldUrl),
+      10.seconds
+    )
 }

@@ -14,12 +14,23 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.models
+package uk.gov.hmrc.test.api.specs
 
-import play.api.libs.json.{Json, OFormat}
+class HelloWorldSpec extends BaseSpec {
 
-case class IndividualsLinks(name: String, href: String, title: String)
+  Feature("Using the Hello World endpoint") {
+    Scenario("When expecting success") {
+      When("I call this endpoint")
 
-object IndividualsLinks {
-  implicit val userJsonFormat: OFormat[IndividualsLinks] = Json.format[IndividualsLinks]
+      val response = testDataHelper.callHelloWorld()
+
+      Then("it should response with a 200 and the expected body")
+
+      response.status shouldBe 200
+      response.body   shouldBe "Hello world"
+
+    }
+
+  }
+
 }
