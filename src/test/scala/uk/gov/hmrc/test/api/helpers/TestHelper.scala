@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.models
+package uk.gov.hmrc.test.api.helpers
 
-import play.api.libs.json.{Json, OFormat}
+import play.api.libs.ws.StandaloneWSRequest
+import uk.gov.hmrc.test.api.service.TransactionalRiskingServiceClient
 
-case class User(firstName: String, lastName: String, nino: String, dateOfBirth: String)
+class TestHelper {
 
-object User {
-  implicit val userJsonFormat: OFormat[User] = Json.format[User]
-  val ninoUser: User                         = User("Luke", "Wood", "EG724113D", "1960-04-06")
+  val transactionalRiskingServiceClient: TransactionalRiskingServiceClient = new TransactionalRiskingServiceClient
+
+  def callHelloWorld(): StandaloneWSRequest#Self#Response =
+    transactionalRiskingServiceClient.callHelloWorld()
+
 }
