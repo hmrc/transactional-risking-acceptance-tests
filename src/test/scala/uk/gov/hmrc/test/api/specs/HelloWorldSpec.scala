@@ -16,27 +16,21 @@
 
 package uk.gov.hmrc.test.api.specs
 
-import play.api.libs.ws.StandaloneWSRequest
-import uk.gov.hmrc.test.api.models.User
-import uk.gov.hmrc.test.api.models.User._
-
-import scala.::
-
 class HelloWorldSpec extends BaseSpec {
 
-  Feature("Example of using the Individuals Matching API") {
+  Feature("Using the Hello World endpoint") {
+    Scenario("When expecting success") {
+      When("I call this endpoint")
 
-    Scenario("Get transactional risking hello world response") {
+      val response = testDataHelper.callHelloWorld()
 
-      When("I invoke the transactional risking local endpoint")
-      val userResponse: StandaloneWSRequest#Self#Response = testDataHelper.getHelloWorldUser(ninoUser)
+      Then("it should response with a 200 and the expected body")
 
-      Then("api call returned with the details of expected response body")
-      userResponse.status shouldBe 200
-      val returnedUser: String = userResponse.body
-      User(returnedUser) shouldBe ninoUser
+      response.status shouldBe 200
+      response.body   shouldBe "Hello world"
 
     }
 
   }
+
 }
