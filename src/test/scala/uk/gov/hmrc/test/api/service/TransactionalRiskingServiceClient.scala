@@ -25,7 +25,7 @@ import scala.concurrent.duration._
 
 class TransactionalRiskingServiceClient extends HttpClient {
   val host: String          = TestConfiguration.url("transactionalRisking")
-  val helloWorldUrl: String = s"$host/transactional-risking/hello-world"
+  val helloWorldUrl: String = s"$host/hello-world"
 
   def callHelloWorld(): StandaloneWSRequest#Self#Response =
     Await.result(
