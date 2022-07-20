@@ -27,7 +27,7 @@ class HelloWorldSpec extends BaseSpec {
       Then("it should response with a 200 and the expected body")
 
       response.status shouldBe 200
-      response.body   shouldBe "Hello world"
+      response.body   shouldBe "HMRC-Assist"
 
     }
 
